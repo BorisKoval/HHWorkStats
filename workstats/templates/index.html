@@ -1,0 +1,37 @@
+<title>Work stats</title>
+<h1> Stats info </h1>
+
+{% load static %}
+
+{% if stats_list %}
+    <table>
+    {% for stat in stats_list %}
+        <tr>
+            <td>{{ stat.id }}</td>
+            <td>{{ stat.date_time }}</td>
+            <td>{{ stat.url }}</td>
+            <td>{{ stat.found }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="/?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="/?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+
+{% else %}
+    <p>No stat are available.</p>
+{% endif %}
+

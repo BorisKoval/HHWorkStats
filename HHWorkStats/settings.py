@@ -25,7 +25,7 @@ SECRET_KEY = '%z!cwyl12+glat0c1dvj-=m_nt1z2vviaujo6&@!f%5c!s7_+k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','kbn-pc']
 
 
 # Application definition
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'HHWorkStats.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,3 +123,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = 'static'
