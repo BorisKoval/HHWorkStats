@@ -1,0 +1,22 @@
+<h1> Frequency info </h1>
+<body>
+
+
+{% load static %}
+
+TEST1
+
+TEST2
+<hr>
+{{stats_nums.keys}}
+
+ <hr>
+    <table>
+    {% for name, stat in stats_nums.items %}
+        <tr>
+            <td>{{ name | safe }}</td>
+            <td>{{ stat }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+</body>
