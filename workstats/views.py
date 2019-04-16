@@ -5,6 +5,7 @@ from .models import Stats, Vacancies, VacanciesDetails
 from django.core.paginator import Paginator
 import pandas as pd
 from django_pandas.io import read_frame
+from collections import OrderedDict
 
 # Create your views here.
 
@@ -31,21 +32,19 @@ class StatsView(generic.ListView):
     #df = read_frame(qs, fieldnames = ['description'])
     #df = qs.to_dataframe()
 
-    print(type(df))
     description_words = df.description.str.split(expand=True).stack()
 
     description_top_words = description_words.value_counts()
 
     filtered_words = description_top_words.select(lambda x: len(x) > 2 and '<' not in x and '>' not in x)
-    print(filtered_words)
-    
-    print(type(filtered_words))
-    #queryset = filtered_data.tolist()
-    print(type(filtered_words.to_dict()))
+    ordered_words = filtered_words.to_dict(into=OrderedDict)
 
-    print(hasattr(filtered_words.to_dict(), '_meta'))
+    #queryset = filtered_data.tolist()
+    
+    #print(hasattr(filtered_words.to_dict(), '_meta'))
+    
     def get_queryset(self):
-        return self.filtered_words.to_dict()
+        return self.ordered_words
 
 class VacsInfoView(generic.ListView):
     template_name = 'workstats/vacs.html'
