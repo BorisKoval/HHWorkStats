@@ -1,0 +1,32 @@
+<html>
+
+<title>Vacancies INFO</title>
+<h1> Vacancies INFO </h1>
+<ul>
+    <li><a href="/">HOME</a></li>
+    <li><a href="/stats">STATISTICS</a></li>
+    <li><a href="/vacs">VACANCIES</a></li>
+    <li><a href="/admin">ADMIN</a></li>
+</ul>
+
+
+<body>
+    
+    <table border="1">
+    {% for vac in vacs_info %}
+        <tr>
+            <td>{{ vac.vacancie.name }}</td>
+            <td>{{ vac.vacancie.id }}</td>
+            <td>{{ vac.vacancie.date_time }}</td>
+
+            <td>{{ vac.employer_name }}</td>
+            <td>{{ vac.description | safe  }}</td>
+            <td>{{ vac.experience }}</td>
+            <td>{{ vac.archive_date_time }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+</body>
+
+</html>

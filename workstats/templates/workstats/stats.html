@@ -1,20 +1,35 @@
 <h1> Frequency info </h1>
+<ul>
+        <li><a href="/">HOME</a></li>
+        <li><a href="/stats">STATISTICS</a></li>
+        <li><a href="/vacs">VACANCIES</a></li>
+        <li><a href="/admin">ADMIN</a></li>
+    </ul>
+
 <body>
 
 
-{% load static %}
-
 TEST1
+<!-- 
+<hr>
+1
+{{stats_nums}}
+<hr>
+2
+{{stats_nums.values}}
+<hr>
+3
+{{stats_nums.data}}
+<hr>
+4
+{{stats_nums.keys}} -->
 
 TEST2
-<hr>
-{{stats_nums.keys}}
-
  <hr>
     <table>
-    {% for name, stat in stats_nums.items %}
+    {% for word, stat in stats_nums.items %}
         <tr>
-            <td>{{ name | safe }}</td>
+            <td>{{ word | safe }}</td>
             <td>{{ stat }}</td>
         </tr>
     {% endfor %}

@@ -21,6 +21,7 @@ from django.conf.urls import include, url
 urlpatterns = [
     path('', include('workstats.urls')),
     path('stats/', include('workstats.urls')),
+    path('vacs/', include('workstats.urls')),
     path('admin/', admin.site.urls),
 ]
 

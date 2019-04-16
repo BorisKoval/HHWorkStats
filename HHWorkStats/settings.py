@@ -127,7 +127,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
 
 if DEBUG:
-   INTERNAL_IPS = ('127.0.0.1', 'localhost',)
+   INTERNAL_IPS = ('127.0.0.1', 'localhost', '192.168.0.53',)
    MIDDLEWARE += (
        'debug_toolbar.middleware.DebugToolbarMiddleware',
    )
