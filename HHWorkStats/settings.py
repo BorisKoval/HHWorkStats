@@ -124,7 +124,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = 'static'
+STATIC_ROOT = ''
+
+#STATICFILES_DIRS = (os.path.join('static'), )
+STATICFILES_DIRS = ('/home/kbn/Projects/HHWorkStats/workstats/static/workstats/', )
 
 if DEBUG:
    INTERNAL_IPS = ('127.0.0.1', 'localhost', '192.168.0.53',)

@@ -1,37 +1,59 @@
-<h1> Frequency info </h1>
-<ul>
-        <li><a href="/">HOME</a></li>
-        <li><a href="/stats">STATISTICS</a></li>
-        <li><a href="/vacs">VACANCIES</a></li>
-        <li><a href="/admin">ADMIN</a></li>
-    </ul>
+<html>
 
-<body>
+    <head>
+
+        <h1> Frequency info </h1>
+        <ul>
+                <li><a href="/">HOME</a></li>
+                <li><a href="/stats">STATISTICS</a></li>
+                <li><a href="/vacs">VACANCIES</a></li>
+                <li><a href="/admin">ADMIN</a></li>
+            </ul>
+        
+        
+        {% load static %}
+        
+        <script src="/static/workstats/jquery/dist/jquery.js"></script>
+
+        <script src="/static/workstats/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
+        <script src="/static/workstats/pandas_bootstrap_table.js"></script>
+
+        <script src="/static/workstats/bootstrap-table/src/bootstrap-table.js"></script>
+
+    </head>
+
+    <body>
+    TEST1
+
+    <!-- <hr>
+    1
+    {{stats_nums}}
+    <hr>
+    2
+    {{stats_nums.values}}
+    <hr>
+    3
+    {{stats_nums.data}}
+    <hr>
+    4
+    {{stats_nums.keys}} -->
+
+    TEST2
+    <table id='datatable'></table>
+    <hr>
+    <!--  <hr>
+        <table>
+        {% for word, stat in stats_nums.items %}
+            <tr>
+                <td>{{ word | safe }}</td>
+                <td>{{ stat }}</td>
+            </tr>
+        {% endfor %}
+        </table> -->
 
 
-TEST1
-<!-- 
-<hr>
-1
-{{stats_nums}}
-<hr>
-2
-{{stats_nums.values}}
-<hr>
-3
-{{stats_nums.data}}
-<hr>
-4
-{{stats_nums.keys}} -->
+    </body>
 
-TEST2
- <hr>
-    <table>
-    {% for word, stat in stats_nums.items %}
-        <tr>
-            <td>{{ word | safe }}</td>
-            <td>{{ stat }}</td>
-        </tr>
-    {% endfor %}
-    </table>
-</body>
+
+</html>

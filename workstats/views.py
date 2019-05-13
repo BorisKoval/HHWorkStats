@@ -6,6 +6,8 @@ from django.core.paginator import Paginator
 import pandas as pd
 from django_pandas.io import read_frame
 from collections import OrderedDict
+import json
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -20,7 +22,7 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Stats.objects.all()
 
-class StatsView(generic.ListView):
+""" class StatsView(generic.ListView):
     template_name = 'workstats/stats.html'
     context_object_name = 'stats_nums'
 
@@ -36,15 +38,40 @@ class StatsView(generic.ListView):
 
     description_top_words = description_words.value_counts()
 
-    filtered_words = description_top_words.select(lambda x: len(x) > 2 and '<' not in x and '>' not in x)
-    ordered_words = filtered_words.to_dict(into=OrderedDict)
+    lengs = ['Python', 'Go', 'C#', '.Net', 'Java', 'PHP', 'C++', 'python', 'php']
+    #filtered_words = description_top_words.select(lambda x: len(x) > 2 and '<' not in x and '>' not in x)
+    filtered_words = description_top_words.select(lambda x: x in ['Python', 'Go', 'C#', '.Net', 'Java', 'PHP', 'C++', 'python', 'php'])
 
-    #queryset = filtered_data.tolist()
+    ordered_words = filtered_words.to_dict(into=OrderedDict)
     
     #print(hasattr(filtered_words.to_dict(), '_meta'))
     
     def get_queryset(self):
-        return self.ordered_words
+        return self.ordered_words """
+
+def StatsView(request):
+    template = 'workstats/stats.html'
+
+    description_full_texts = VacanciesDetails.objects.values('description')
+    df = pd.DataFrame(description_full_texts)
+
+    description_words = df.description.str.split(expand=True).stack()
+
+    description_top_words = description_words.value_counts()
+
+    lengs = ['Python', 'Go', 'C#', '.Net', 'Java', 'PHP', 'C++', 'python', 'php']
+    filtered_words = description_top_words.select(lambda x: x in ['Python', 'Go', 'C#', '.Net', 'Java', 'PHP', 'C++', 'python', 'php'])
+
+    ordered_words = filtered_words.to_dict(into=OrderedDict)
+
+    #json = df.to_json(orient='records')
+
+    print(filtered_words.to_json())
+    json = filtered_words.to_json()
+    context = {'data': filtered_words.to_json()}
+
+    
+    return render(request, template, context)
 
 class VacsInfoView(generic.ListView):
     template_name = 'workstats/vacs.html'
@@ -53,3 +80,19 @@ class VacsInfoView(generic.ListView):
 
     def get_queryset(self):
         return VacanciesDetails.objects.select_related('vacancie')[:10]
+
+""" class TableTest(generic.ListView):
+    template_name = 'workstats/tabletest.html'
+    context_object_name = 'test_data'
+    vacs = Vacancies.objects.all()
+
+    def get_queryset(self):
+        return VacanciesDetails.objects.select_related('vacancie')[:10]
+ """
+def TableTest(request):
+    template_name = 'workstats/tabletest.html'
+    #context_object_name = 'test_data'
+    vacs = Vacancies.objects.all()
+    info_data = VacanciesDetails.objects.select_related('vacancie')[:10]
+    
+    return render(request, template_name, {"test_data": info_data})
